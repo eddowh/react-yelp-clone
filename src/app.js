@@ -6,11 +6,16 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom'
 
+import './app.css';
+import styles from './styles.module.css';
 
 class App extends Component {
   render() {
+    console.log(styles);
     return (
-      <div>Hello World!</div>
+      <div className={styles.wrapper}>
+        Hello World!
+      </div>
     );
   }
 }

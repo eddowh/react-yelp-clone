@@ -32,4 +32,50 @@ var config = getConfig({
   clearBeforeBuild: true  // blow away any previously built files
 })
 
+// Dynamic naming scheme of CSS
+const cssModulesNames = `${isDev ? '[path][name]__[local]__' : ''}[hash:base64:5]`;
+
+/**
+ * Load the initial loader by finding it in the array of
+ * `config.module.loaders` with regex
+ */
+const matchCssLoaders = /(^|!)(css-loader)($|!)/;
+
+const findLoader = (loaders, match) => {
+  const found = loaders.filter(l => l && l.loader && l.loader.match(match));
+  return found ? found[0] : null;
+}
+
+const cssloader = findLoader(config.module.loaders, matchCssLoaders);
+
+/**
+ * Create a new loader as well as modify existing loader to support
+ * loading css modules
+ */
+const newloader = Object.assign({}, cssloader, {
+  test: /\.module\.css$/,
+  include: [src],
+  loader: cssloader.loader
+    .replace(matchCssLoaders,
+             `$1$2?modules&localIdentName=${cssModulesNames}$3`)
+})
+
+config.module.loaders.push(newloader);
+cssloader.test = new RegExp(`[^module]${cssloader.test.source}`)
+cssloader.loader = newloader.loader
+
+config.module.loaders.push({
+  test: /\.css$/,
+  include: [modules],
+  loader: 'style!css'
+})
+
+// PostCSS
+config.postcss = [].concat([
+  require('precss')({}),
+  require('autoprefixer')({}),
+  require('cssnano')({})
+])
+
+/* Export (finally) */
 module.exports = config;
