@@ -6,15 +6,11 @@
 import React, {Component} from 'react';
 import {browserHistory, Router, Route, Redirect} from 'react-router';
 
-class Home extends React.Component {
-  render() {
-    return (<div>Hello world</div>)
-  }
-}
+import mainRoutes from 'views/Main/routes.js';
 
 const routes = (
   <Router>
-    <Route path="/" component={Home} />
+    {mainRoutes}
     <Redirect from="*" to="/" />
   </Router>
  )
