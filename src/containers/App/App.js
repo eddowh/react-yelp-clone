@@ -24,11 +24,6 @@ export default class App extends Component {
         <div style={{ height: '100%' }}>
           {this.content}
         </div>
-        <h1>
-          <i className="fa fa-star"></i>
-          &nbsp;
-          Environment: {__NODE_ENV__}
-        </h1>
       </div>
     );
   }
