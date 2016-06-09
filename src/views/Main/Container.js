@@ -48,6 +48,17 @@ class Container extends Component {
   }
 
   render() {
+    let children = null;
+    if (this.props.children) {
+      // We have children in the Container component
+      children = React.cloneElement(
+        this.props.children,
+        {
+          google: this.props.google,
+          places: this.state.places,
+          loaded: this.props.loaded
+        });
+    }
     return (
       <div>
         <Map
@@ -61,8 +72,8 @@ class Container extends Component {
             title={'Restaurants'}
             places={this.state.places}
           />
-          <div>
-            <h1>Content</h1>
+          <div className={styles.content}>
+            {children}
           </div>
         </Map>
       </div>
