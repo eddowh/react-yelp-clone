@@ -1,0 +1,21 @@
+/**
+ * src/views/Main/styles.module.css
+ */
+
+.wrapper {
+  overflow-y: scroll;
+  display: flex;
+  margin: 0;
+  padding: 15px;
+
+  height: 100vh;
+  -webkit-box-orient: horizontal;
+  -o-box-orient: horizontal;
+}
+
+.content {
+  position: relative;
+  /* sets our content box as the larger of the two elements (sidebar vs content) */
+  flex: 2;
+  top: 80px;
+}
