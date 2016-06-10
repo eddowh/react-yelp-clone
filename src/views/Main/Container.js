@@ -2,7 +2,7 @@
  * src/views/Main/Container.js
  */
 
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import Map, {GoogleApiWrapper} from 'google-maps-react';
 
 import {searchNearby} from 'utils/googleApiHelpers';
@@ -13,8 +13,8 @@ import Sidebar from 'components/Sidebar/Sidebar.js';
 import styles from './styles.module.css';
 
 class Container extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       places: [],
       pagination: null
@@ -44,7 +44,15 @@ class Container extends Component {
         });
       }).catch((status, result) => {
         // there was an error
+        console.log("Error fetching nearby", status);
       })
+  }
+
+  onMarkerClick(item) {
+    const {place} = item;
+    const {push} = this.context.router;
+    // not comfortable with hardcoding this
+    push(`/map/detail/${place.place_id}`);
   }
 
   render() {
@@ -56,8 +64,11 @@ class Container extends Component {
         {
           google: this.props.google,
           places: this.state.places,
-          loaded: this.props.loaded
-        });
+          loaded: this.props.loaded,
+          router: this.context.router,
+          onMarkerClick: this.onMarkerClick.bind(this)
+        }
+      );
     }
     return (
       <div>
@@ -79,6 +90,10 @@ class Container extends Component {
       </div>
     )
   }
+}
+
+Container.contextTypes = {
+  router: PropTypes.object
 }
 
 export default GoogleApiWrapper({

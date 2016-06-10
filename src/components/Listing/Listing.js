@@ -11,7 +11,6 @@ import styles from './styles.module.css';
 
 export default class Listing extends Component {
   render() {
-    console.log(this.props.places);
     return (
       <div className={classnames(styles.container)}>
         {

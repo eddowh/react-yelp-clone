@@ -9,10 +9,9 @@ import {browserHistory, Router, Route, Redirect} from 'react-router';
 import mainRoutes from 'views/Main/routes.js';
 
 const routes = (
-  <Router>
+  <Route path=''>
     {mainRoutes}
-    <Redirect from="*" to="/" />
-  </Router>
+  </Route>
  )
 
 export default routes;

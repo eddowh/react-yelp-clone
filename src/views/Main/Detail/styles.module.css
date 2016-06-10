@@ -1,0 +1,12 @@
+/**
+ * src/views/Main/Detail/styles.module.css
+ */
+
+@import url("../../../styles/base.css");
+
+.header {
+  padding: 0 var(--padding);
+  h2 {
+    font-size: 1.5em;
+  }
+}
