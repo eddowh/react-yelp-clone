@@ -15,8 +15,6 @@ export default class Header extends Component {
       <div className={styles.topbar}>
         <Link to="/">
           <h1>
-            <i className="fa fa-star"></i>
-            &nbsp;
             Yelp
           </h1>
         </Link>
