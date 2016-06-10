@@ -76,9 +76,11 @@ export default class Detail extends Component {
 
   render() {
     if (this.state.loading) {
-      return (<div className={styles.wrapper}>
-        Loading...
-      </div>)
+      return (
+        <div className={styles.wrapper}>
+          Loading...
+        </div>
+      )
     }
 
     const {place} = this.state;

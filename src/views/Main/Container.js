@@ -81,6 +81,7 @@ class Container extends Component {
           <Header />
           <Sidebar
             title={'Restaurants'}
+            onListItemClick={this.onMarkerClick.bind(this)}
             places={this.state.places}
           />
           <div className={styles.content}>
