@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 export default class Detail extends Component {
   static childContextTypes = {
-    router: PropTypes.object,
+    router: PropTypes.object
   }
 
   constructor(props, context) {
@@ -37,6 +37,18 @@ export default class Detail extends Component {
     }
   }
 
+  renderPhotos(place) {
+    if (!place.photos || place.photos.length == 0) return;
+
+    const cfg = {maxWidth: 100, maxHeight: 100}
+    return (<div className={styles.photoStrip}>
+      {place.photos.map(p => {
+        const url = `${p.getUrl(cfg)}.png`
+        return (<img key={url} src={url} />)
+      })}
+    </div>)
+  }
+
   getDetails(map) {
     const {google, params} = this.props;
     const {placeId} = params;
@@ -61,25 +73,25 @@ export default class Detail extends Component {
     });
   }
 
+
   render() {
     if (this.state.loading) {
-      console.log('Loading map');
-      return (
-        <div className={styles.wrapper}>
-          Loading...
-        </div>
-      );
+      return (<div className={styles.wrapper}>
+        Loading...
+      </div>)
     }
 
-    // We're no longer loading when we get here
     const {place} = this.state;
-    console.log("Place", place);
+
     return (
       <div className={styles.wrapper}>
         <div className={styles.header}>
           <h2>{place.name}</h2>
         </div>
+        <div className={styles.details}>
+          {this.renderPhotos(place)}
+        </div>
       </div>
-    );
+    )
   }
 }

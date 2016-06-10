@@ -3,6 +3,7 @@
  */
 
 @import url("../../styles/base.css");
+@import url("../../styles/queries.css");
 
 .sidebar {
   height: 100%;
@@ -13,9 +14,16 @@
   position: relative;
   z-index: 0;
 
-  /* flex-direction: column; */
-  /* order: 2; */
+  flex-direction: column;
+  order: 2;
   flex: 1;
+
+  @media (--screen-phone-lg) {
+    display: block;
+    flex-direction: row;
+    order: 1;
+    flex: 1;
+  }
 
   .heading {
     flex: 1;

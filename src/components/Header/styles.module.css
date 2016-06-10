@@ -27,6 +27,10 @@
     }
   }
 
+  a:visited {
+    color: white;
+  }
+
   section {
     position: absolute;
     top: 0px;
